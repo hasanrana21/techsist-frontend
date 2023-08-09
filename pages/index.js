@@ -9,13 +9,29 @@ export default function Home() {
   console.log("pageId", categoryId);
   const getNavMenus = async () => {
     return await axios.get("/api/crops/category").then((res) => {
-      console.log("resData", res.data);
       return res.data;
     });
   };
   const { data, isLoading, isError } = useQuery({
     queryKey: ["menus"],
     queryFn: () => getNavMenus(),
+  });
+
+  // CATEGORY CROPS LISTS
+  const fetchCategoryCrops = async () => {
+    let query = `category=${categoryId}&is_archived=false&page=${1}&page_size=${10}`;
+    return await axios.get(`/api/crops/?${query}`).then((res) => {
+      console.log("cropsList", res.data.results);
+      return res.data.results;
+    });
+  };
+  const {
+    data: cropsData,
+    isLoading: cropsListLoading,
+    isError: cropsListError,
+  } = useQuery({
+    queryKey: ["categoryCrops", categoryId],
+    queryFn: () => fetchCategoryCrops(),
   });
   return (
     <MainLayout>
@@ -24,6 +40,7 @@ export default function Home() {
         loading={isLoading}
         error={isError}
         setCategoryId={setCategoryId}
+        tableContent={cropsData}
       />
     </MainLayout>
   );

@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-// import axios from "@/plugins/Axios";
-// import { useQuery } from "react-query";
+import UiTable from "../table";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -19,7 +19,7 @@ function CustomTabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <div>{children}</div>
         </Box>
       )}
     </div>
@@ -39,24 +39,13 @@ function a11yProps(index) {
   };
 }
 
-const UiTabs = ({ data, loading, error, setCategoryId }) => {
+const UiTabs = ({ data, loading, error, setCategoryId, tableContent }) => {
   const [value, setValue] = useState(1);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
     setCategoryId(newValue);
   };
-
-  //   const getNavMenus = async () => {
-  //     return await axios.get("/api/crops/category").then((res) => {
-  //       console.log("resData", res.data);
-  //       return res.data;
-  //     });
-  //   };
-  //   const { data, isLoading, isError } = useQuery({
-  //     queryKey: ["menus"],
-  //     queryFn: () => getNavMenus(),
-  //   });
 
   if (loading) {
     return <div>Loading...</div>;
@@ -96,6 +85,29 @@ const UiTabs = ({ data, loading, error, setCategoryId }) => {
         data.map((menu) => (
           <CustomTabPanel key={menu?.id} value={value} index={menu?.id}>
             {menu?.title}
+            <UiTable tableContent={tableContent}>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  my: 5,
+                }}
+              >
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <h3>Crop List</h3>
+                  <Button variant="contained" sx={{ mx: 2, height: "80%" }}>
+                    + Add Crop
+                  </Button>
+                </Box>
+
+                <TextField
+                  id="outlined-basic"
+                  label="Search"
+                  variant="outlined"
+                  sx={{ height: "50%" }}
+                />
+              </Box>
+            </UiTable>
           </CustomTabPanel>
         ))}
     </Box>
