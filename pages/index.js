@@ -1,5 +1,9 @@
 import MainLayout from "@/layouts/MainLayout";
 
 export default function Home() {
-  return <MainLayout>this is home page</MainLayout>;
+  return (
+    <MainLayout>
+      <p>this is home page</p>
+    </MainLayout>
+  );
 }
