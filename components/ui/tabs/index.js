@@ -6,7 +6,8 @@ import Box from "@mui/material/Box";
 import UiTable from "../table";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-
+import UiModal from "../modal";
+import CropCreateForm from "@/components/modules/home/CropCreateForm";
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -41,6 +42,7 @@ function a11yProps(index) {
 
 const UiTabs = ({ data, loading, error, setCategoryId, tableContent }) => {
   const [value, setValue] = useState(1);
+  const [openModal, setOpenModal] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -95,9 +97,16 @@ const UiTabs = ({ data, loading, error, setCategoryId, tableContent }) => {
               >
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                   <h3>Crop List</h3>
-                  <Button variant="contained" sx={{ mx: 2, height: "80%" }}>
+                  <Button
+                    onClick={() => setOpenModal(true)}
+                    variant="contained"
+                    sx={{ mx: 2, height: "80%" }}
+                  >
                     + Add Crop
                   </Button>
+                  <UiModal open={openModal} setOpenModal={setOpenModal}>
+                    <CropCreateForm />
+                  </UiModal>
                 </Box>
 
                 <TextField

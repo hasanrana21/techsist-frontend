@@ -89,7 +89,7 @@ const UiTable = ({ tableContent, children }) => {
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
-          count={3}
+          count={tableContent?.length}
         />
         {/* count={rows.length} */}
       </Paper>
