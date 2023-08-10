@@ -6,7 +6,6 @@ import { useQuery } from "react-query";
 
 export default function Home() {
   const [categoryId, setCategoryId] = useState(1);
-  console.log("pageId", categoryId);
   const getNavMenus = async () => {
     return await axios.get("/api/crops/category").then((res) => {
       return res.data;
@@ -21,7 +20,6 @@ export default function Home() {
   const fetchCategoryCrops = async () => {
     let query = `category=${categoryId}&is_archived=false&page=${1}&page_size=${10}`;
     return await axios.get(`/api/crops/?${query}`).then((res) => {
-      console.log("cropsList", res.data.results);
       return res.data.results;
     });
   };
