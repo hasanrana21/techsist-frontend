@@ -215,7 +215,7 @@ const CropCreateForm = () => {
                 onChange={(e) => handleTextField(e, key)}
               />
               <Typography sx={{ my: 2 }} level="title-md">
-                Crop's Disease Image
+                Crops Disease Image
               </Typography>
               <Card
                 orientation="horizontal"
