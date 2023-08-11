@@ -87,22 +87,33 @@ const CropCreateForm = () => {
     e.preventDefault();
     formData.disease = diseases;
     let form = new FormData();
-    // let dis = new FormData();
 
-    // form.append(formData.disease[0], formData.disease[0].title);
-    // form.append(formData.disease[0], formData.disease[1].image);
-    // form.append(formData.disease[0], formData.disease[2].url);
     Object.keys(formData).map((i) => {
       form.append(i, formData[i]);
+      if (i === "disease") {
+        // console.log("22", formData[i]);
+        formData[i].map((item, index) => {
+          // console.log("33", index, item);
+          Object.keys(item).map((key, f) => {
+            // console.log("44", key, item[key]);
+            form.append(`disease[${index}]${[key]}`, item[key]);
+          });
+        });
+      }
     });
 
-    // formData.disease.map((item) => {
-    //   Object.keys(item).map((key, i) => {
-    //     dis.append(`item[${i}]`, item[key]);
-    //   });
+    // new approach
+    // formData.disease.map((item, i) => {
+    //   let form = new FormData();
+    //   form.append(`item_${i}_title`, item.title);
+    //   form.append(`item_${i}_image`, item.image);
+    //   form.append(`item_${i}_url`, item.url);
     // });
-    // form.append("diseas", dis);
-    console.log("submit", form);
+    // new approach
+
+    // another approach
+
+    // console.log("submit", dis);
     axios.post("/api/crops/", form);
   };
   return (
