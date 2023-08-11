@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const Axios = axios.create({
-  baseURL: "http://192.168.1.17:8000/", // Replace with your API base URL
+  baseURL: "https://ab5b-103-12-174-82.ngrok-free.app/", // Replace with your API base URL
 });
 
 // Request interceptor
