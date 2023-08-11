@@ -128,10 +128,12 @@ const CropCreateForm = () => {
         }}
       >
         <AspectRatio ratio="1" sx={{ width: 100 }}>
-          <picture>
+          {/* <picture>
             <img src={cropImage} loading="lazy" alt="Image" />
-          </picture>
-          {/* <Image src={cropImage} alt="img" /> */}
+          </picture> */}
+          {cropImage && (
+            <Image src={cropImage} width={0} height={0} alt="img" />
+          )}
         </AspectRatio>
         <input
           onChange={(e) => handleImageChange(e, "cropImage")}
@@ -222,7 +224,10 @@ const CropCreateForm = () => {
               >
                 <CardOverflow>
                   <AspectRatio ratio="1" sx={{ width: 100 }}>
-                    <img src={item?.url} loading="lazy" alt="Image" />
+                    {/* <img src={item?.url} loading="lazy" alt="Image" /> */}
+                    {item?.url && (
+                      <Image src={item?.url} width={0} height={0} alt="img" />
+                    )}
                   </AspectRatio>
                 </CardOverflow>
                 <CardContent
