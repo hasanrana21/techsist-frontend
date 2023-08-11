@@ -14,6 +14,7 @@ import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import Textarea from "@mui/joy/Textarea";
 import axios from "@/plugins/Axios";
+import Image from "next/image";
 
 const CropCreateForm = () => {
   const [imgIndex, setImgIndex] = useState(null);
@@ -127,7 +128,10 @@ const CropCreateForm = () => {
         }}
       >
         <AspectRatio ratio="1" sx={{ width: 100 }}>
-          <img src={cropImage} loading="lazy" alt="Image" />
+          <picture>
+            <img src={cropImage} loading="lazy" alt="Image" />
+          </picture>
+          {/* <Image src={cropImage} alt="img" /> */}
         </AspectRatio>
         <input
           onChange={(e) => handleImageChange(e, "cropImage")}
